@@ -1,12 +1,4 @@
 // OGÓLNA FUNKCJA
-function randomString() {
-	var chars = '0123456789abcdefghiklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXTZ'.split();
-	var str = '', i;
-	for (i = 0; i < 10; i++) {
-	  str += chars[Math.floor(Math.random() * chars.length)];
-	}
-	return str;
-}
 
 function generateTemplate(name, data, basicElement) {
   	var template = document.getElementById(name).innerHTML;
@@ -35,3 +27,36 @@ var card2 = new Card('stworzyc tablice kanban');
 // DODAWANIE KART DO KOLUMN
 todoColumn.createCard(card1);
 doingColumn.createCard(card2);
+
+//zmienne do komunikacji z API
+var baseUrl ='http://kodilla.com/pl/bootcamp-api';
+var myHeaders = {
+	'X-Client-Id': 'X-Client-Id',
+	'X-Auth-Token': 'X-Auth-Token'
+};
+
+//funkcja z zapytaniem o zasób tablicy
+fetch(baseUrl + '/board', {headers: my Headers})
+	.then(function(resp) {
+		return resp.json();
+	})
+	.then(function(resp) {
+		setupColumns(resp.columns);
+	});
+
+//tworzenie kolumn
+function setupColumns(columns) {
+	columns.forEach(function(column) {
+		var col = new Column(column.id, column.name);
+		board.addColumn(col);
+		setupCards(col, column.cards);
+	});
+}
+
+//tworzenie kart
+function setupCards(col, cards) {
+	cards.forEach(function(card) {
+		var cardObj = new Card(card.id, card.name);
+		col.addCard(cardObj);
+	});
+}

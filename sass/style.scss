@@ -10,9 +10,9 @@ body {
   margin: 0;
   background-color: $green;
 }
-* {
+/* {
   box-sizing: border-box;
-]
+} */
 .board {
   position: relative;
   width: 100%;
@@ -68,7 +68,7 @@ body {
       font-size: 26px;
       font-family: $header-font;
       }
-    .btn-delete {
+    .delete {
       display: flex;
       justify-content: center;
       position: absolute;

@@ -18,7 +18,7 @@ var myHeaders = {
 };
 
 //funkcja z zapytaniem o zasób tablicy
-fetch(baseUrl + '/board', {headers: my Headers})
+fetch(baseUrl + '/board', {headers: myHeaders})
 	.then(function(resp) {
 		return resp.json();
 	})
